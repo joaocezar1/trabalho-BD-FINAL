@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Banco de Dados do hospital</title>
+</head>
+<body>
+  <h1>Bem vindo ao banco de Dados do hospital</h1>
+  <label>Escreva aqui uma lista de objetos JS para inserção em massa</label>
+  <textarea class="insercao"> </textarea>
+  <label>Digite aqui o nome da tabela a inserir os dados</label>
+  <input type="text" id="tabelaInsercao">
+  <button onclick="popular()">Inserir</button>
+  <label>Escreva aqui </label>
+  <button onclick="inserir()">Clique para inserir um novo paciente</button>
+  <button onclick="ler()">Clique aqui para mostrar a tabela pacientes</button>
+  <button onclick="atualizar()"></button>
+  <button></button>
+
+  <div class="resultado">
+
+  </div>
+  <script>
+    async function popular() {
+      const medicos = [
+        {
+          crm: '879567/CE',
+          nome: 'Dra. Rita Santana',
+          especialidade: 'Oftalmologista',
+          telefone: '85999999999',
+          num_cons: 105,
+          corredor_cons: 10,
+          cod_computador_cons: 105
+        }
+      ];
+
+      const resposta = await fetch('http://localhost:3000/popular', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ medicos })
+      });
+
+      const texto = await resposta.text();
+      alert(texto);
+    }
+  </script>
+</body>
+</html>
